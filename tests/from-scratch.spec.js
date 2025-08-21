@@ -5,111 +5,64 @@ const {
   happyBirthdayPet,
   funTypes,
   rounder,
-  fizzBuzzish,
+  formatName,
+  extractDomain,
+  startsWithVowel,
+  rotate,
 } = require('../src/from-scratch');
 
 const testSuiteName = 'From Scratch Tests';
 const scoresDir = path.join(__dirname, '..', 'scores');
 const scoreCounter = new ScoreCounter(testSuiteName, scoresDir);
 
-// mock console.log with jest mock function
-const log = jest.spyOn(console, 'log').mockImplementation(() => { });
-
 describe(testSuiteName, () => {
-  afterEach(jest.clearAllMocks);
-
-  it('measureRain - logs the right message based on rain amount', () => {
-    // We're logging, so one (less optimal) way is to reset our mock function with each call
-    // so we always know the latest function call's arguments
-    measureRain(0);
-    expect(log).toHaveBeenCalledWith('drought');
-    jest.clearAllMocks();
-    measureRain(1);
-    expect(log).toHaveBeenCalledWith('dry');
-    jest.clearAllMocks();
-    measureRain(2);
-    expect(log).toHaveBeenCalledWith('average');
-    jest.clearAllMocks();
-    measureRain(3);
-    expect(log).toHaveBeenCalledWith('average');
-    jest.clearAllMocks();
-    measureRain(4);
-    expect(log).toHaveBeenCalledWith('rainy');
-    jest.clearAllMocks();
-    measureRain(5);
-    expect(log).toHaveBeenCalledWith('rainy');
-    jest.clearAllMocks();
-    measureRain(6);
-    expect(log).toHaveBeenCalledWith('flood');
-    jest.clearAllMocks();
-    measureRain(7);
-    expect(log).toHaveBeenCalledWith('flood');
-    jest.clearAllMocks();
-    measureRain(10);
-    expect(log).toHaveBeenCalledWith('flood');
+  it('measureRain - returns the right message based on rain amount', () => {
+    expect(measureRain(0)).toBe('drought');
+    expect(measureRain(1)).toBe('dry');
+    expect(measureRain(2)).toBe('average');
+    expect(measureRain(3)).toBe('average');
+    expect(measureRain(4)).toBe('rainy');
+    expect(measureRain(5)).toBe('rainy');
+    expect(measureRain(6)).toBe('flood');
+    expect(measureRain(7)).toBe('flood');
+    expect(measureRain(10)).toBe('flood');
 
     scoreCounter.correct(expect); // DO NOT TOUCH
   });
 
-  it('happyBirthdayPet - logs the right message based on breed and age', () => {
+  it('happyBirthdayPet - returns the right message based on breed and age', () => {
     const snake = 'snake'; // these string constants prevent typos
     const cat = 'cat';
     const dog = 'dog';
 
-    // A much better way to test multiple mocks is keep track of the
-    // number of calls, and check the arguments of each call directly
-    // A little more thinking, but a much cleaner test
-    happyBirthdayPet(snake, 0);
-    expect(log).toHaveBeenNthCalledWith(1, 'Hiss hiss!');
-    happyBirthdayPet(snake, 4);
-    expect(log).toHaveBeenNthCalledWith(2, 'Hiss hiss!');
-    happyBirthdayPet(cat, 2);
-    expect(log).toHaveBeenNthCalledWith(3, 'Mew mew!');
-    happyBirthdayPet(cat, 5);
-    expect(log).toHaveBeenNthCalledWith(4, 'Meow meow!');
-    happyBirthdayPet(cat, 10);
-    expect(log).toHaveBeenNthCalledWith(5, 'Meow meow!');
-    happyBirthdayPet(dog, 4);
-    expect(log).toHaveBeenNthCalledWith(6, 'Arf arf!');
-    happyBirthdayPet(dog, 5);
-    expect(log).toHaveBeenNthCalledWith(7, 'Woof woof!');
-    happyBirthdayPet(dog, 9);
-    expect(log).toHaveBeenNthCalledWith(8, 'Woof woof!');
-    happyBirthdayPet(dog, 10);
-    expect(log).toHaveBeenNthCalledWith(9, 'Boof!');
-    happyBirthdayPet(dog, 11);
-    expect(log).toHaveBeenNthCalledWith(10, 'Boof!');
-    happyBirthdayPet('bird', 1);
-    expect(log).toHaveBeenNthCalledWith(11, 'Happy birthday!');
-    happyBirthdayPet('racoon', 5);
-    expect(log).toHaveBeenNthCalledWith(12, 'Happy birthday!');
+    expect(happyBirthdayPet(snake, 0)).toBe('Hiss hiss!');
+    expect(happyBirthdayPet(snake, 4)).toBe('Hiss hiss!');
+    expect(happyBirthdayPet(cat, 2)).toBe('Mew mew!');
+    expect(happyBirthdayPet(cat, 5)).toBe('Meow meow!');
+    expect(happyBirthdayPet(cat, 10)).toBe('Meow meow!');
+    expect(happyBirthdayPet(dog, 4)).toBe('Arf arf!');
+    expect(happyBirthdayPet(dog, 5)).toBe('Woof woof!');
+    expect(happyBirthdayPet(dog, 9)).toBe('Woof woof!');
+    expect(happyBirthdayPet(dog, 10)).toBe('Boof!');
+    expect(happyBirthdayPet(dog, 11)).toBe('Boof!');
+    expect(happyBirthdayPet('bird', 1)).toBe('Happy birthday!');
+    expect(happyBirthdayPet('racoon', 5)).toBe('Happy birthday!');
 
     scoreCounter.correct(expect); // DO NOT TOUCH
   });
 
-  it('funTypes - logs the right message based on type', () => {
-    funTypes('string');
-    expect(log).toHaveBeenNthCalledWith(1, "That's just some text.");
-    funTypes('');
-    expect(log).toHaveBeenNthCalledWith(2, "That's just some text.");
-    funTypes(1);
-    expect(log).toHaveBeenNthCalledWith(3, "That's a good number.");
-    funTypes(0);
-    expect(log).toHaveBeenNthCalledWith(4, "That's a good number.");
-    funTypes(true);
-    expect(log).toHaveBeenNthCalledWith(5, 'To bool, or not to bool?');
-    funTypes(false);
-    expect(log).toHaveBeenNthCalledWith(6, 'To bool, or not to bool?');
-    funTypes(undefined);
-    expect(log).toHaveBeenNthCalledWith(7, "Nothing, but I didn't set that.");
-    funTypes(null);
-    expect(log).toHaveBeenNthCalledWith(8, 'Nothing, and I did set that.');
-    funTypes({});
-    expect(log).toHaveBeenNthCalledWith(9, 'Anybody got the key?');
-    funTypes([]);
-    expect(log).toHaveBeenNthCalledWith(10, 'I order you to be indexed.');
-    funTypes(NaN);
-    expect(log).toHaveBeenNthCalledWith(11, "Well, now you're just showing off.");
+  it('funTypes - returns the right message based on type', () => {
+    expect(funTypes('string')).toBe("That's just some text.");
+    expect(funTypes('')).toBe("That's just some text.");
+    expect(funTypes(1)).toBe("That's a good number.");
+    expect(funTypes(0)).toBe("That's a good number.");
+    expect(funTypes(true)).toBe('To bool, or not to bool?');
+    expect(funTypes(false)).toBe('To bool, or not to bool?');
+    expect(funTypes(undefined)).toBe("Nothing, but I didn't set that.");
+    expect(funTypes(null)).toBe('Nothing, and I did set that.');
+    expect(funTypes({})).toBe('Anybody got the key?');
+    expect(funTypes([])).toBe('I order you to be indexed.');
+    expect(funTypes(NaN)).toBe("Well, now you're just showing off.");
 
     scoreCounter.correct(expect); // DO NOT TOUCH
   });
@@ -129,27 +82,48 @@ describe(testSuiteName, () => {
     scoreCounter.correct(expect); // DO NOT TOUCH
   });
 
-  it('fizzBuzzish - logs the right message based on the number', () => {
-    fizzBuzzish(1);
-    expect(log).toHaveBeenNthCalledWith(1, 1);
-    fizzBuzzish(2);
-    expect(log).toHaveBeenNthCalledWith(2, 2);
-    fizzBuzzish(3);
-    expect(log).toHaveBeenNthCalledWith(3, 'fizz');
-    fizzBuzzish(4);
-    expect(log).toHaveBeenNthCalledWith(4, 4);
-    fizzBuzzish(5);
-    expect(log).toHaveBeenNthCalledWith(5, 'buzz');
-    fizzBuzzish(10);
-    expect(log).toHaveBeenNthCalledWith(6, 'buzz');
-    fizzBuzzish(12);
-    expect(log).toHaveBeenNthCalledWith(7, 'fizz');
-    fizzBuzzish(15);
-    expect(log).toHaveBeenNthCalledWith(8, 'fizzBuzz!');
-    fizzBuzzish(30);
-    expect(log).toHaveBeenNthCalledWith(9, 'fizzBuzz!');
-    fizzBuzzish(31);
-    expect(log).toHaveBeenNthCalledWith(10, 31);
+  it('formatName - formats names with proper capitalization', () => {
+    expect(formatName('john', 'doe')).toBe('John Doe');
+    expect(formatName('MARY', 'jane')).toBe('Mary Jane');
+    expect(formatName('MarY', 'JAne')).toBe('Mary Jane');
+    expect(formatName('bOb', 'SMITH')).toBe('Bob Smith');
+    expect(formatName('a', 'b')).toBe('A B');
+    expect(formatName('JOHN', 'DOE')).toBe('John Doe');
+
+    scoreCounter.correct(expect); // DO NOT TOUCH
+  });
+
+  it('extractDomain - extracts domain from email addresses', () => {
+    expect(extractDomain('user@example.com')).toBe('example.com');
+    expect(extractDomain('test@google.com')).toBe('google.com');
+    expect(extractDomain('student@marcylab.org')).toBe('marcylab.org');
+    expect(extractDomain('admin@company.co.uk')).toBe('company.co.uk');
+    expect(extractDomain('simple@test')).toBe('test');
+
+    scoreCounter.correct(expect); // DO NOT TOUCH
+  });
+
+  it('startsWithVowel - checks if string starts with vowel', () => {
+    expect(startsWithVowel('apple')).toBe(true);
+    expect(startsWithVowel('banana')).toBe(false);
+    expect(startsWithVowel('Elephant')).toBe(true);
+    expect(startsWithVowel('orange')).toBe(true);
+    expect(startsWithVowel('zebra')).toBe(false);
+    expect(startsWithVowel('umbrella')).toBe(true);
+    expect(startsWithVowel('cat')).toBe(false);
+    expect(startsWithVowel('Iguana')).toBe(true);
+
+    scoreCounter.correct(expect); // DO NOT TOUCH
+  });
+
+  it('rotate - rotates string characters by specified amount', () => {
+    expect(rotate('hello', 1)).toBe('ohell');
+    expect(rotate('hello', 3)).toBe('llohe');
+    expect(rotate('world', 2)).toBe('ldwor');
+    expect(rotate('abc', 1)).toBe('cab');
+    expect(rotate('xyz', 3)).toBe('xyz');
+    expect(rotate('test', 0)).toBe('test');
+    expect(rotate('rotate', 4)).toBe('tatero');
 
     scoreCounter.correct(expect); // DO NOT TOUCH
   });

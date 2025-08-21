@@ -1,15 +1,12 @@
-// const {
-//   measureRain,
-//   happyBirthdayPet,
-//   funTypes,
-//   rounder,
-//   fizzBuzzish,
-// } = require('./from-scratch');
-// const {
-//   getRandomIntInRange,
-//   coolnessGauge,
-//   funkoPopAddictionLevel,
-//   getWeatherReport,
-//   returnPositiveNegativeZero,
-// } = require('./debug');
-// const { wildlyBiasedReview } = require('./modify');
+const {
+  measureRain,
+  happyBirthdayPet,
+  funTypes,
+  rounder,
+  formatName,
+  extractDomain,
+  startsWithVowel,
+  rotate,
+} = require('./from-scratch');
+
+// Test your functions here!

@@ -10,7 +10,16 @@ const funTypes = () => {
 const rounder = () => {
 };
 
-const fizzBuzzish = () => {
+const formatName = () => {
+};
+
+const extractDomain = () => {
+};
+
+const startsWithVowel = () => {
+};
+
+const rotate = () => {
 };
 
 module.exports = {
@@ -18,5 +27,8 @@ module.exports = {
   happyBirthdayPet,
   funTypes,
   rounder,
-  fizzBuzzish,
+  formatName,
+  extractDomain,
+  startsWithVowel,
+  rotate,
 };
