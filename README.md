@@ -1,4 +1,4 @@
-# 1.0.2 - Flow Control and Math
+# Strings & Conditionals
 
 - [Get Set Up](#get-set-up)
 - [Before you start](#before-you-start)
@@ -37,35 +37,37 @@ Good luck!
 
 ### Question 1: measureRain
 Write a function `measureRain` that takes a single argument, a number `inches`. It should return a message depending on the number of inches:
-- 0 inches - 'drought'
-- less than 2 inches - 'dry'
-- less than 4 inches - 'average'
-- less than 6 inches - 'rainy'
-- 6 or more inches  - 'flood'
+- 0 inches - `'drought'`
+- less than 2 inches - `'dry'`
+- less than 4 inches - `'average'`
+- less than 6 inches - `'rainy'`
+- 6 or more inches  - `'flood'`
 
 ### Question 2: happyBirthdayPet
 Write a function `happyBirthdayPet` that takes two arguments, a string `breed` and a number `age`. It should return a message in the following situations:
-- 'snake', any age - `'Hiss hiss!'`
-- 'cat', less than 5 - `'Mew mew!'`
-- 'cat', 5 or more - `'Meow meow!'`
-- 'dog', less than 5 - `'Arf arf!'`
-- 'dog', 5 to less than 10 - `'Woof woof!'`
-- 'dog', 10 or more - `'Boof!'`
+- `'snake'`, any age - `'Hiss hiss!'`
+- `'cat'`, less than 5 - `'Mew mew!'`
+- `'cat'`, 5 or more - `'Meow meow!'`
+- `'dog'`, less than 5 - `'Arf arf!'`
+- `'dog'`, 5 to less than 10 - `'Woof woof!'`
+- `'dog'`, 10 or more - `'Boof!'`
 - If none of these conditions are met, just return a message of `'Happy birthday!'`
 
 ### Question 3: funTypes
-Write a function `funTypes` that takes an argument `jsType`. The type could be one of the following: a `string`, a `number`, a `boolean`, `undefined`, `null`, an `object`, an `array`, or `NaN`. It should return a message in the following situations:
+Write a function `funTypes` that takes an argument `jsType`. The type could be one of the following: a `string`, a `number`, a `boolean`, `undefined`, `null`, an `object`, an `array`, or `NaN`. 
 
-- any string - "That's just some text."
-- any number - "That's a good number."
-- a boolean - "To bool, or not to bool?"
-- undefined - "Nothing, but I didn't set that."
-- null - "Nothing, and I did set that."
-- an object - "Anybody got the key?"
-- an array - "I order you to be indexed."
-- NaN - "Well, now you're just showing off."
+It should return a message in the following situations:
 
-Some of these won't work using the `typeof` operator. If you're stuck, try Googling "how to tell if a value is of type ____ JavaScript".
+- any string - `"That's just some text."`
+- any number - `"That's a good number."`
+- a boolean - `"To bool, or not to bool?"`
+- undefined - `"Nothing, but I didn't set that."`
+- null - `"Nothing, and I did set that."`
+- an object - `"Anybody got the key?"`
+- an array - `"I order you to be indexed."`
+- NaN - `"Well, now you're just showing off."`
+
+Some of these won't work using the `typeof` operator. If you're stuck, try Googling "JavaScript how to tell if a value is of type ____".
 
 ### Question 4: rounder
 Write a function `rounder` that takes two arguments: a decimal number `float` and a string `roundingSetting`. `roundingSetting` could be only one of 3 values `up`, `down`, or `honest`. It should *RETURN* an integer based on the following value of `roundingSetting`:
