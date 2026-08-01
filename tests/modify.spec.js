@@ -1,10 +1,6 @@
-const path = require('path');
-const ScoreCounter = require('score-tests'); // eslint-disable-line import/no-extraneous-dependencies
 const { wildlyBiasedReview, getWeatherReport } = require('../src/modify');
 
 const testSuiteName = 'Modify Tests';
-const scoresDir = path.join(__dirname, '..', 'scores');
-const scoreCounter = new ScoreCounter(testSuiteName, scoresDir);
 
 const log = jest.spyOn(console, 'log').mockImplementation(() => { });
 
@@ -14,8 +10,6 @@ describe(testSuiteName, () => {
 
     expect(textContent.includes('return')).toBeTruthy();
     expect(textContent.includes('if')).toBeTruthy();
-
-    scoreCounter.correct(expect); // DO NOT TOUCH
   });
 
   it('wildlyBiasedReview - logs the right message based on location', () => {
@@ -40,8 +34,6 @@ describe(testSuiteName, () => {
     const textContent = wildlyBiasedReview.toString();
     expect(textContent.includes('return')).toBeTruthy();
     expect(textContent.includes('if')).toBeTruthy();
-
-    scoreCounter.correct(expect); // DO NOT TOUCH
   });
 
   it('getWeatherReport - minimizes repetition', () => {
@@ -76,10 +68,5 @@ describe(testSuiteName, () => {
     getWeatherReport(71);
     expect(log).toHaveBeenNthCalledWith(5, nice);
     expect(log).toHaveBeenNthCalledWith(6, report);
-    scoreCounter.correct(expect); // DO NOT TOUCH
   });
-
-  // IGNORE PLEASE
-  beforeEach(() => scoreCounter.add(expect));
-  afterAll(scoreCounter.export);
 });

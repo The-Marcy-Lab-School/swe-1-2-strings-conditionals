@@ -1,5 +1,3 @@
-const path = require('path');
-const ScoreCounter = require('score-tests');
 const {
   measureRain,
   happyBirthdayPet,
@@ -12,8 +10,6 @@ const {
 } = require('../src/from-scratch');
 
 const testSuiteName = 'From Scratch Tests';
-const scoresDir = path.join(__dirname, '..', 'scores');
-const scoreCounter = new ScoreCounter(testSuiteName, scoresDir);
 
 describe(testSuiteName, () => {
   it('measureRain - returns the right message based on rain amount', () => {
@@ -26,8 +22,6 @@ describe(testSuiteName, () => {
     expect(measureRain(6)).toBe('flood');
     expect(measureRain(7)).toBe('flood');
     expect(measureRain(10)).toBe('flood');
-
-    scoreCounter.correct(expect); // DO NOT TOUCH
   });
 
   it('happyBirthdayPet - returns the right message based on breed and age', () => {
@@ -47,8 +41,6 @@ describe(testSuiteName, () => {
     expect(happyBirthdayPet(dog, 11)).toBe('Boof!');
     expect(happyBirthdayPet('bird', 1)).toBe('Happy birthday!');
     expect(happyBirthdayPet('racoon', 5)).toBe('Happy birthday!');
-
-    scoreCounter.correct(expect); // DO NOT TOUCH
   });
 
   it('funTypes - returns the right message based on type', () => {
@@ -63,8 +55,6 @@ describe(testSuiteName, () => {
     expect(funTypes({})).toBe('Anybody got the key?');
     expect(funTypes([])).toBe('I order you to be indexed.');
     expect(funTypes(NaN)).toBe("Well, now you're just showing off.");
-
-    scoreCounter.correct(expect); // DO NOT TOUCH
   });
 
   it('rounder - returns the right number based on rounding setting', () => {
@@ -78,8 +68,6 @@ describe(testSuiteName, () => {
     expect(rounder(1.5, 'honest')).toBe(2);
     expect(rounder(1.4, 'honest')).toBe(1);
     expect(rounder(1.0, 'honest')).toBe(1);
-
-    scoreCounter.correct(expect); // DO NOT TOUCH
   });
 
   it('formatName - formats names with proper capitalization', () => {
@@ -89,8 +77,6 @@ describe(testSuiteName, () => {
     expect(formatName('bOb', 'SMITH')).toBe('Bob Smith');
     expect(formatName('a', 'b')).toBe('A B');
     expect(formatName('JOHN', 'DOE')).toBe('John Doe');
-
-    scoreCounter.correct(expect); // DO NOT TOUCH
   });
 
   it('extractDomain - extracts domain from email addresses', () => {
@@ -99,8 +85,6 @@ describe(testSuiteName, () => {
     expect(extractDomain('student@marcylab.org')).toBe('marcylab.org');
     expect(extractDomain('admin@company.co.uk')).toBe('company.co.uk');
     expect(extractDomain('simple@test')).toBe('test');
-
-    scoreCounter.correct(expect); // DO NOT TOUCH
   });
 
   it('startsWithVowel - checks if string starts with vowel', () => {
@@ -112,8 +96,6 @@ describe(testSuiteName, () => {
     expect(startsWithVowel('umbrella')).toBe(true);
     expect(startsWithVowel('cat')).toBe(false);
     expect(startsWithVowel('Iguana')).toBe(true);
-
-    scoreCounter.correct(expect); // DO NOT TOUCH
   });
 
   it('rotate - rotates string characters by specified amount', () => {
@@ -124,11 +106,5 @@ describe(testSuiteName, () => {
     expect(rotate('xyz', 3)).toBe('xyz');
     expect(rotate('test', 0)).toBe('test');
     expect(rotate('rotate', 4)).toBe('tatero');
-
-    scoreCounter.correct(expect); // DO NOT TOUCH
   });
-
-  // IGNORE PLEASE
-  beforeEach(() => scoreCounter.add(expect));
-  afterAll(scoreCounter.export);
 });
