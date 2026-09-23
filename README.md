@@ -25,6 +25,7 @@ Practice branching with `if` / `elif` / `else`, and working with strings.
   - [Question 13: `return_positive_negative_zero`](#question-13-return_positive_negative_zero)
 - [Bonus: match statements](#bonus-match-statements)
 - [Submitting](#submitting)
+- [Good luck!](#good-luck)
 
 ## AI Use on This Assignment
 
@@ -87,7 +88,8 @@ Write your solutions in `src/from_scratch.py`.
 
 ### Question 1: `measure_rain`
 
-Takes a number `inches` and returns a message:
+Write a function `measure_rain` that takes a single argument, a number
+`inches`. It should return a message depending on the number of inches:
 
 - 0 inches — `"drought"`
 - less than 2 inches — `"dry"`
@@ -97,7 +99,8 @@ Takes a number `inches` and returns a message:
 
 ### Question 2: `happy_birthday_pet`
 
-Takes a string `breed` and a number `age`, and returns a message:
+Write a function `happy_birthday_pet` that takes two arguments, a string
+`breed` and a number `age`. It should return a message in these situations:
 
 - `"snake"`, any age — `"Hiss hiss!"`
 - `"cat"`, less than 5 — `"Mew mew!"`
@@ -109,7 +112,8 @@ Takes a string `breed` and a number `age`, and returns a message:
 
 ### Question 3: `fun_types`
 
-Takes a value of any type and returns a message about it:
+Write a function `fun_types` that takes a value of any type and returns a
+message about what kind of thing it is:
 
 | Type | Message |
 | --- | --- |
@@ -122,37 +126,45 @@ Takes a value of any type and returns a message about it:
 | `tuple` | `"You cannot change me."` |
 | `nan` | `"Well, now you're just showing off."` |
 
-Look up `isinstance()`.
+Some of these will not work with [`type()`](https://www.w3schools.com/python/ref_func_type.asp)
+alone — look up `isinstance()` too. If you get stuck, ask your AI tutor in
+**tutor mode** how Python tells one type from another. Make it explain the
+idea rather than hand you the check.
 
 Two traps here, and the tests check both. **A `bool` is an `int` in Python**,
 so `isinstance(True, int)` is `True` — order your checks accordingly. And
-`nan` is a `float`, so you need `math.isnan()` to tell it apart. Yes, really.
+`nan` is a `float`, so you need `math.isnan()` to spot it. Yes, really.
 
 ### Question 4: `rounder`
 
-Takes a `number` and a `setting` string, and returns the number rounded:
+Write a function `rounder` that takes a `number` and a `setting` string, and
+returns the number rounded according to the setting:
 
 - `"up"` — always round up
 - `"down"` — always round down
 - `"honest"` — round to the nearest, with `.5` going up
 
-Look up the `math` module. Be careful with `"honest"`: Python's built-in
-`round()` does **banker's rounding**, so `round(0.5)` is `0`, not `1`.
+Have a look at the [`math` module](https://www.w3schools.com/python/module_math.asp).
+Be careful with `"honest"`. Python's built-in `round()` does **banker's
+rounding**, which sends a tie to the nearest even number. So `round(0.5)` is
+`0`, not `1`. Food for thought.
 
 ### Question 5: `format_name`
 
-Takes a `first` and `last` name in any mix of cases and returns them properly
-capitalized.
+Write a function `format_name` that takes a `first` and `last` name in any mix
+of cases and returns them properly capitalized.
 
 ```python
 format_name("MarY", "JAne")   # "Mary Jane"
 ```
 
-There is a string method that does exactly this for one word.
+There is a [string method](https://www.w3schools.com/python/python_ref_string.asp)
+that does exactly this for one word. This is a cool trick to know.
 
 ### Question 6: `extract_domain`
 
-Takes an email address and returns everything after the `@`.
+Write a function `extract_domain` that takes an email address and returns
+everything after the `@`.
 
 ```python
 extract_domain("user@example.com")   # "example.com"
@@ -172,8 +184,8 @@ starts_with_vowel("banana")    # False
 
 ### Question 8: `rotate`
 
-Takes a string and a number, and returns the string with that many characters
-moved from the end to the front.
+Write a function `rotate` that takes a string and a number. It returns the
+string with that many characters moved from the end to the front.
 
 ```python
 rotate("hello", 1)    # "ohell"
@@ -182,8 +194,9 @@ rotate("xyz", 3)      # "xyz"
 rotate("test", 0)     # "test"
 ```
 
-Slicing makes this short. Watch what happens when the amount equals the length
-of the string.
+[Slicing](https://www.w3schools.com/python/python_strings_slicing.asp) makes
+this short. Watch what happens when the amount equals the length of the
+string. Don't overthink it!
 
 ## Modify
 
@@ -191,17 +204,22 @@ Change the two functions already in `src/modify.py`.
 
 ### Question 9: `wildly_biased_review`
 
-This prints one of two reviews depending on the location. Rewrite it as a
-**guard clause**. Handle the boring case first and `return` early, so the NYC
-case runs without an `else` around it. The tests check the `else` is gone.
+Rewrite `wildly_biased_review` so it uses a guard clause. Keep the behavior
+exactly the same.
+
+A **guard clause** is an `if` statement that returns before the rest of the
+code gets to execute. Used well, it saves you from writing `else` or `elif`
+at all. Here, handle the boring case first and `return`, so the NYC case runs
+without an `else` wrapped around it. The tests check the `else` is gone.
 
 ### Question 10: `get_weather_report`
 
-This builds a `weather_report` string, prints it, then prints
-`"And that's your report!"`. It repeats both prints in every branch.
+Refactor `get_weather_report` so it stops repeating itself. It builds a
+`weather_report` string, prints it, then prints `"And that's your report!"` —
+and it does both of those in every single branch.
 
-Refactor so each of those lines appears **once**. The branches should decide
-what the message *is*, not do the printing.
+Make each of those lines appear **once**. The branches should decide what the
+message *is*, not do the printing.
 
 ## Debug
 
@@ -213,12 +231,12 @@ then fix it.
 
 ### Question 12: `funko_pop_addiction_level`
 
-This takes a number of Funko Pops and returns a message of support, or
-concern. No matter what you pass it, it only ever returns the first two
-messages.
+Oh man. `funko_pop_addiction_level` takes a number of Funko Pops and returns a
+message of support, or concern. However, no matter what you pass it, it only
+ever returns the first two messages.
 
-Work out why the later branches are unreachable, then fix the order so every
-message can come back.
+Work out why the later branches can never be reached, then fix the order so
+every message can come back.
 
 > Not sure what a Funko Pop is? Just google it.
 
@@ -234,16 +252,20 @@ more than one inline `if`.
 
 Not scored. Do them anyway.
 
-Python 3.10 added the `match` statement, which is a tidier way to write a long
-chain of comparisons against one value. Rewrite two earlier questions with it
-in `src/bonus_match.py`, then remove the `@pytest.mark.skip` lines in
-`tests/test_bonus_match.py` to check your work.
+You may already have come across the
+[match statement](https://www.w3schools.com/python/python_match.asp), which
+Python added in 3.10 as an alternative to a long `if`/`elif` chain. If the
+mood strikes you, try your hand at the match versions of `measure_rain_match`
+and `rounder_match` in `src/bonus_match.py`.
 
-- `measure_rain_match` — same rules as question 1
-- `rounder_match` — same rules as question 4
+To test your code, open `tests/test_bonus_match.py` and remove the
+`@pytest.mark.skip` line above each test.
+
+[This is a good article on `match`](https://realpython.com/structural-pattern-matching/)
+to check out.
 
 `match` is at its best comparing one value against fixed options, so one of
-these will fit it far better than the other. Notice which.
+these two will suit it far better than the other. Notice which. HmmmmMMMMmmm?
 
 ## Submitting
 
@@ -254,3 +276,8 @@ git push
 ```
 
 Open a pull request to your instructor for feedback.
+
+## Good luck!
+
+Conditionals are the first place your code starts making real decisions. Take
+your time with the order of your branches and you've got this!
