@@ -163,8 +163,8 @@ that does exactly this for one word. This is a cool trick to know.
 
 ### Question 6: `extract_domain`
 
-Write a function `extract_domain` that takes an email address and returns
-everything after the `@`.
+Write a function `extract_domain` that takes one parameter: a string `email`.
+It should return everything after the `@`, which is the domain.
 
 ```python
 extract_domain("user@example.com")   # "example.com"
@@ -173,8 +173,9 @@ extract_domain("simple@test")        # "test"
 
 ### Question 7: `starts_with_vowel`
 
-Returns `True` if `word` starts with a vowel, `False` otherwise. Capital
-letters count.
+Write a function `starts_with_vowel` that takes one parameter: a string
+`word`. It should return `True` if the word starts with a vowel and `False`
+otherwise. Capital letters count as vowels too.
 
 ```python
 starts_with_vowel("apple")     # True
